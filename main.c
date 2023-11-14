@@ -1,81 +1,83 @@
 #include "monty.h"
-stack_t *stackHead = NULL;
+stack_t *head = NULL;
 
 /**
- * main - Entry point of the program.
- * @argc: Number of command-line arguments.
- * @argv: Array of command-line argument strings.
- * Return: Always 0.
+ * main - entry point
+ * @argc: arguments count
+ * @argv: list of arguments
+ * Return: always 0
  */
+
 int main(int argc, char *argv[])
 {
-    if (argc != 2) {
-        fprintf(stderr, "USAGE: monty file\n");
-        exit(EXIT_FAILURE);
-    }
-    open_file(argv[1]);
-    free_nodes();
-    return 0;
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+	open_file(argv[1]);
+	free_nodes();
+	return (0);
 }
 
 /**
- * createNode - Creates a new node.
- * @value: The value to be stored in the node.
- * Return: A pointer to the newly created node on success, otherwise NULL.
+ * create_node - Creates a node.
+ * @n: Number to go inside the node.
+ * Return: Upon sucess a pointer to the node. Otherwise NULL.
  */
-stack_t *createNode(int value)
+stack_t *create_node(int n)
 {
-    stack_t *newNode;
+	stack_t *node;
 
-    newNode = malloc(sizeof(stack_t));
-    if (newNode == NULL)
-        err(4);
-
-    newNode->next = NULL;
-    newNode->prev = NULL;
-    newNode->n = value;
-
-    return newNode;
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
+		err(4);
+	node->next = NULL;
+	node->prev = NULL;
+	node->n = n;
+	return (node);
 }
 
 /**
- * freeNodes - Frees all nodes in the stack.
+ * free_nodes - Frees nodes in the stack.
  */
 void free_nodes(void)
 {
-    stack_t *tempNode;
+	stack_t *tmp;
 
-    if (stackHead == NULL)
-        return;
+	if (head == NULL)
+		return;
 
-    while (stackHead != NULL) {
-        tempNode = stackHead;
-        stackHead = stackHead->next;
-        free(tempNode);
-    }
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
 }
 
+
 /**
- * addToQueue - Adds a node to the end of the queue.
- * @newNode: Pointer to the new node.
- * @lineNumber: Line number of the opcode (unused in this function).
+ * add_to_queue - Adds a node to the queue.
+ * @new_node: Pointer to the new node.
+ * @ln: line number of the opcode.
  */
-void addToQueue(stack_t **newNode, __attribute__((unused)) unsigned int lineNumber)
+void add_to_queue(stack_t **new_node, __attribute__((unused))unsigned int ln)
 {
-    stack_t *tempNode;
+	stack_t *tmp;
 
-    if (newNode == NULL || *newNode == NULL)
-        exit(EXIT_FAILURE);
+	if (new_node == NULL || *new_node == NULL)
+		exit(EXIT_FAILURE);
+	if (head == NULL)
+	{
+		head = *new_node;
+		return;
+	}
+	tmp = head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
 
-    if (stackHead == NULL) {
-        stackHead = *newNode;
-        return;
-    }
+	tmp->next = *new_node;
+	(*new_node)->prev = tmp;
 
-    tempNode = stackHead;
-    while (tempNode->next != NULL)
-        tempNode = tempNode->next;
-
-    tempNode->next = *newNode;
-    (*newNode)->prev = tempNode;
 }
