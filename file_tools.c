@@ -26,7 +26,8 @@ void openAndReadFile(char *filename)
  * @fd: Pointer to the file descriptor.
  * Return: void
  */
-void read_file(FILE *fd) {
+void read_file(FILE *fd)
+{
     int lineNumber, format = 0;
     char *buffer = NULL;
     size_t len = 0;
