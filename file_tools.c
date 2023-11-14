@@ -107,7 +107,7 @@ void find_func(char *opcode, char *value, int lineNumber, int format)
         }
     }
     if (flag == 1)
-        handleError(3, lineNumber, opcode);
+        err(3, lineNumber, opcode);
 }
 
 /**
@@ -133,11 +133,11 @@ void callFunction(op_func func, char *op, char *val, int ln, int format)
             flag = -1;
         }
         if (val == NULL)
-            handleError(5, ln);
+            err(5, ln);
         for (i = 0; val[i] != '\0'; i++)
         {
             if (isdigit(val[i]) == 0)
-                handleError(5, ln);
+                err(5, ln);
         }
         node = create_node(atoi(val) * flag);
         if (format == 0)
