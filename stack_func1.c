@@ -12,16 +12,16 @@ void addToStack(stack_t **newNode, __attribute__((unused)) unsigned int lineNumb
     if (newNode == NULL || *newNode == NULL)
         exit(EXIT_FAILURE);
 
-    if (stackHead == NULL)
+    if (head == NULL)
     {
-        stackHead = *newNode;
+        head = *newNode;
         return;
     }
 
-    temp = stackHead;
-    stackHead = *newNode;
-    stackHead->next = temp;
-    temp->prev = stackHead;
+    temp = head;
+    head = *newNode;
+    head->next = temp;
+    temp->prev = head;
 }
 
 /**
