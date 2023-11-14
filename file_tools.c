@@ -26,7 +26,7 @@ void read_file(FILE *fd) {
     char *buffer = NULL;
     size_t len = 0;
 
-    for (lineNumber = 1; getline(&buffer, &len, fd) != -1; lineNumber++)
+    for (lineNumber = 1; get_line(&buffer, &len, fd) != -1; lineNumber++)
     {
         format = parse_line(buffer, lineNumber, format);
     }
@@ -145,5 +145,5 @@ void callFunction(op_func func, char *op, char *val, int ln, int format)
         if (format == 1)
             add_to_queue(&node, ln);
     } else
-        func(&read, ln);
+        func(&head, ln);
 }
