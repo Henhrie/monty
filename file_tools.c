@@ -1,5 +1,9 @@
 #include "monty.h"
 
+ssize_t get_line(char **lineptr, size_t *n, int fd);
+void call_fun(op_func func, char *op, char *val, int ln, int format);
+stack_t *head;
+
 /**
  * openAndReadFile - Opens and reads a file.
  * @filename: The file path.
