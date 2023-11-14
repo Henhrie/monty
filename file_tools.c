@@ -10,9 +10,9 @@ void openAndReadFile(char *filename)
     FILE *fileDescriptor = fopen(filename, "r");
 
     if (filename == NULL || fileDescriptor == NULL)
-        handleError(2, filename);
+        err(2, filename);
 
-    readFile(fileDescriptor);
+    read_file(fileDescriptor);
     fclose(fileDescriptor);
 }
 
@@ -21,14 +21,14 @@ void openAndReadFile(char *filename)
  * @fd: Pointer to the file descriptor.
  * Return: void
  */
-void readFile(FILE *fd) {
+void read_file(FILE *fd) {
     int lineNumber, format = 0;
     char *buffer = NULL;
     size_t len = 0;
 
-    for (lineNumber = 1; getline(&buffer, &len, fd) != -1; lineNumber++)
+    for (lineNumber = 1; get_line(&buffer, &len, fd) != -1; lineNumber++)
     {
-        format = parseLine(buffer, lineNumber, format);
+        format = parse_line(buffer, lineNumber, format);
     }
     free(buffer);
 }
@@ -60,7 +60,7 @@ int parseLine(char *buffer, int lineNumber, int format)
     if (strcmp(opcode, "queue") == 0)
         return 1;
 
-    findFunction(opcode, value, lineNumber, format);
+    find_func(opcode, value, lineNumber, format);
     return format;
 }
 
@@ -73,25 +73,25 @@ int parseLine(char *buffer, int lineNumber, int format)
  * @lineNumber: Line number.
  * Return: void
  */
-void findFunction(char *opcode, char *value, int lineNumber, int format)
+void find_func(char *opcode, char *value, int lineNumber, int format)
 {
     int i;
     int flag;
 
     instruction_t functionList[] = {
-        {"push", addToStack},
-        {"pall", printStack},
-        {"pint", printTop},
-        {"pop", popTop},
+        {"push", add_to_stack},
+        {"pall", print_stack},
+        {"pint", print_top},
+        {"pop", pop_top},
         {"nop", nop},
-        {"swap", swapNodes},
-        {"add", addNodes},
-        {"sub", subNodes},
-        {"div", divNodes},
-        {"mul", mulNodes},
-        {"mod", modNodes},
-        {"pchar", printChar},
-        {"pstr", printStr},
+        {"swap", swap_nodes},
+        {"add", add_nodes},
+        {"sub", sub_nodes},
+        {"div", div_nodes},
+        {"mul", mul_nodes},
+        {"mod", mod_nodes},
+        {"pchar", print_char},
+        {"pstr", print_str},
         {"rotl", rotl},
         {"rotr", rotr},
         {NULL, NULL}
@@ -102,7 +102,7 @@ void findFunction(char *opcode, char *value, int lineNumber, int format)
 
     for (flag = 1, i = 0; functionList[i].opcode != NULL; i++) {
         if (strcmp(opcode, functionList[i].opcode) == 0) {
-            callFunction(functionList[i].f, opcode, value, lineNumber, format);
+            findFunction(functionList[i].f, opcode, value, lineNumber, format);
             flag = 0;
         }
     }
@@ -139,11 +139,11 @@ void callFunction(op_func func, char *op, char *val, int ln, int format)
             if (isdigit(val[i]) == 0)
                 handleError(5, ln);
         }
-        node = createNode(atoi(val) * flag);
+        node = create_node(atoi(val) * flag);
         if (format == 0)
             func(&node, ln);
         if (format == 1)
-            addToQueue(&node, ln);
+            add_to_queue(&node, ln);
     } else
         func(&head, ln);
 }

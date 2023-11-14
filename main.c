@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
         fprintf(stderr, "USAGE: monty file\n");
         exit(EXIT_FAILURE);
     }
-    openAndReadFile(argv[1]);
-    freeNodes();
+    open_file(argv[1]);
+    free_nodes();
     return 0;
 }
 
@@ -29,7 +29,7 @@ stack_t *createNode(int value)
 
     newNode = malloc(sizeof(stack_t));
     if (newNode == NULL)
-        handleError(4);
+        err(4);
 
     newNode->next = NULL;
     newNode->prev = NULL;
@@ -41,7 +41,7 @@ stack_t *createNode(int value)
 /**
  * freeNodes - Frees all nodes in the stack.
  */
-void freeNodes(void)
+void free_nodes(void)
 {
     stack_t *tempNode;
 
