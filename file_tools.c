@@ -145,5 +145,5 @@ void callFunction(op_func func, char *op, char *val, int ln, int format)
         if (format == 1)
             add_to_queue(&node, ln);
     } else
-        func(&head, ln);
+        func(&read, ln);
 }
