@@ -1,8 +1,8 @@
 #include "monty.h"
 
 /**
- * open_file - opens a file
- * @file_name: the file namepath
+ * openAndReadFile - Opens and reads a file.
+ * @filename: The file path.
  * Return: void
  */
 
@@ -19,8 +19,8 @@ void open_file(char *file_name)
 
 
 /**
- * read_file - reads a file
- * @fd: pointer to file descriptor
+ * read_file - Reads a file.
+ * @fd: Pointer to file descriptor.
  * Return: void
  */
 
@@ -40,10 +40,10 @@ void read_file(FILE *fd)
 
 /**
  * parse_line - Separates each line into tokens to determine
- * which function to call
- * @buffer: line from the file
- * @line_number: line number
- * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * which function to call.
+ * @buffer: Line from the file.
+ * @line_number: Line number.
+ * @format:  Storage format. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
  * Return: Returns 0 if the opcode is stack. 1 if queue.
  */
@@ -71,11 +71,11 @@ int parse_line(char *buffer, int line_number, int format)
 }
 
 /**
- * find_func - find the appropriate function for the opcode
- * @opcode: opcode
- * @value: argument of opcode
- * @format:  storage format. If 0 Nodes will be entered as a stack.
- * @ln: line number
+ * find_func - Find the appropriate function for the opcode.
+ * @opcode: Opcode.
+ * @value: Argument of opcode.
+ * @format:  Storage format. If 0 Nodes will be entered as a stack.
+ * @ln: Line number.
  * if 1 nodes will be entered as a queue.
  * Return: void
  */
@@ -122,9 +122,9 @@ void find_func(char *opcode, char *value, int ln, int format)
 /**
  * call_fun - Calls the required function.
  * @func: Pointer to the function that is about to be called.
- * @op: string representing the opcode.
- * @val: string representing a numeric value.
- * @ln: line numeber for the instruction.
+ * @op: String representing the opcode.
+ * @val: String representing a numeric value.
+ * @ln: Line numeber for the instruction.
  * @format: Format specifier. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
  */
