@@ -1,7 +1,7 @@
 #include "monty.h"
 #include <stdio.h>
 
-ssize_t get_line(char **lineptr, size_t *n, int fd);
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 void call_fun(op_func func, char *op, char *val, int ln, int format);
 stack_t *head;
 
