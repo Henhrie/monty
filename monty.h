@@ -41,9 +41,7 @@ void open_file(char *file_name);
 int parse_line(char *buffer, int line_number, int format);
 void read_file(FILE *);
 int len_chars(FILE *);
-void find_func(char *, char *, int, int)
-ssize_t get_line(char **lineptr, size_t *n, int fd);
-
+void find_func(char *, char *, int, int);
 
 /* Stack operations */
 stack_t *create_node(int n);
