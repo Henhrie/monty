@@ -26,7 +26,7 @@ void read_file(FILE *fd) {
     char *buffer = NULL;
     size_t len = 0;
 
-    for (lineNumber = 1; get_line(&buffer, &len, fd) != -1; lineNumber++)
+    for (lineNumber = 1; getline(&buffer, &len, fd) != -1; lineNumber++)
     {
         format = parse_line(buffer, lineNumber, format);
     }
@@ -48,7 +48,7 @@ int parseLine(char *buffer, int lineNumber, int format)
     const char *delim = "\n ";
 
     if (buffer == NULL)
-        handleError(4);
+        err(4);
 
     opcode = strtok(buffer, delim);
     if (opcode == NULL)
@@ -102,7 +102,7 @@ void find_func(char *opcode, char *value, int lineNumber, int format)
 
     for (flag = 1, i = 0; functionList[i].opcode != NULL; i++) {
         if (strcmp(opcode, functionList[i].opcode) == 0) {
-            findFunction(functionList[i].f, opcode, value, lineNumber, format);
+            call_fun(functionList[i].f, opcode, value, lineNumber, format);
             flag = 0;
         }
     }
