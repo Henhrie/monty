@@ -1,6 +1,6 @@
 #include "monty.h"
 
-ssize_t get_line(char **lineptr, size_t *n, int fd);
+
 void call_fun(op_func func, char *op, char *val, int ln, int format);
 stack_t *head;
 
@@ -30,7 +30,7 @@ void read_file(FILE *fd) {
     char *buffer = NULL;
     size_t len = 0;
 
-    for (line_number = 1; get_line(&buffer, &len, fd) != -1; line_number++)
+    for (line_number = 1; getline(&buffer, &len, fd) != -1; line_number++)
     {
         format = parse_line(buffer, lineNumber, format);
     }
